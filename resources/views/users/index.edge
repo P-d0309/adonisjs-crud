@@ -1,0 +1,76 @@
+@layout('layouts/master')
+@set('title', 'Home page')
+
+@section('body')
+
+<div class="card bg-base-100 shadow-xl my-4">
+	<div class="card-body">
+		<div class="card-title justify-between">
+			<h2 class="">Users</h2>
+			<a class="btn btn-success" href="{{ route('auth.users.create') }}">Add User</a>
+		</div>
+	</div>
+</div>
+
+@if(flashMessages.has('message'))
+<div class="alert alert-{{ flashMessages.get('message.level') }} shadow-lg">
+	<div>
+		<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none"
+			viewBox="0 0 24 24">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+				d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+		</svg>
+		<span>{{ flashMessages.get('message.content') }}</span>
+	</div>
+</div>
+@endif
+
+<div class="card bg-base-100 shadow-xl my-4">
+	<div class="card-body">
+		<div class="overflow-x-auto">
+			<table class="table table-zebra w-full">
+				<!-- head -->
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					@each(user in users)
+					<tr>
+						<td>{{ user.id }}</td>
+						<td>{{ user.fullName }}</td>
+						<td>{{ user.email }}</td>
+						<td>
+							<div class="flex justify-evenly">
+								<a class="btn btn-success" href="{{ route('auth.users.edit', {id: user.id}) }}">Edit</a>
+								<button class="btn btn-error btn-delete-user" data-id="{{ user.id }}">Delete</button>
+							</div>
+						</td>
+					</tr>
+					@endeach
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+@end
+
+@section('scripts')
+@super
+@entryPointScripts('users')
+{
+<script>
+	if({{ flashMessages.has('message') }}) {
+		confetti({
+			particleCount: 500,
+			spread: 50,
+			origin: { y: 0.6 },
+		  });
+	}
+</script>
+}
+@end

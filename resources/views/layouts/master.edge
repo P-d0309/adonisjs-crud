@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>AdonisJS - A fully featured web framework for Node.js</title>
+	@routes
+	@entryPointStyles('app')
+	@!section('css')
+	@entryPointScripts('app')
+	<script src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.9.3/tsparticles.confetti.bundle.min.js"></script>
+</head>
+
+<body>
+	@include('layouts/partial/header')
+	<div class="container mx-auto px-4">
+		<main>
+			@!section('body')
+		</main>
+	</div>
+	@include('layouts/partial/footer')
+	@!section('scripts')
+</body>
+
+</html>

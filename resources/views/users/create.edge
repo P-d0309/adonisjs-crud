@@ -1,0 +1,59 @@
+@layout('layouts/master')
+@set('title', 'Home page')
+
+@section('body')
+
+<div class="card bg-base-100 shadow-xl my-4">
+	<div class="card-body">
+		<div class="card-title justify-between">
+			<h2 class="">Add User</h2>
+		</div>
+	</div>
+</div>
+
+<div class="card bg-base-100 shadow-xl my-4">
+	<div class="card-body">
+		<form action="{{ route('auth.users.store') }}" method="post" enctype="multipart/form-data">
+			<div class="grid grid-cols-2 gap-4">
+				<div class="form-control w-full">
+					<label class="label">
+						<span class="label-text">What is your first name?</span>
+					</label>
+					<input type="text" placeholder="Type here" class="input input-bordered w-full"  name="first_name" value="{{ flashMessages.get('first_name', '') }}"/>
+					@!component('components/error', {
+						name: 'errors.first_name',
+					})
+				</div>
+
+				<div class="form-control w-full">
+					<label class="label">
+						<span class="label-text">What is your last name?</span>
+					</label>
+					<input type="text" placeholder="Type here" class="input input-bordered w-full" name="last_name" value="{{ flashMessages.get('last_name', '') }}"/>
+					@!component('components/error', {
+						name: 'errors.last_name',
+					})
+				</div>
+
+				<div class="form-control w-full">
+					<label class="label">
+						<span class="label-text">What is your Email ID?</span>
+					</label>
+					<input type="text" placeholder="Type here" class="input input-bordered w-full" name="email" value="{{ flashMessages.get('email', '') }}"/>
+					@!component('components/error', {
+						name: 'errors.email',
+					})
+				</div>
+
+				<div class="form-control w-full">
+					<label class="label">
+						<span class="label-text">Profile Image?</span>
+					</label>
+					<input type="file" class="file-input file-input-bordered file-input-md w-full" name="profile"/>
+				</div>
+			</div>
+			<button class="btn btn-success mt-2" type="submit">Submit</button>
+		</form>
+	</div>
+</div>
+@end

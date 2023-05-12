@@ -1,0 +1,40 @@
+@layout('layouts/app')
+@set('title', 'Home page')
+
+@section('body')
+
+<div class="h-screen flex justify-center items-center">
+	<div class="card bg-base-100 shadow-xl">
+		<div class="card-body">
+			<form action="{{ route('postLogin') }}" method="post">
+				<h2 class="card-title justify-center">Login</h2>
+				<div class="form-control w-full max-w-xs">
+					<label class="label">
+						<span class="label-text">Email:</span>
+					</label>
+					<input type="email" placeholder="Type here" class="input input-bordered w-full max-w-xs" name="email" value="{{ flashMessages.get('email', '')}}" />
+					@if(flashMessages.has('errors.email'))
+					<label class="label">
+						<span class="label-text text-red-500">{{ flashMessages.get('errors.email') }}</span>
+					</label>
+					@endif
+				</div>
+				<div class="form-control w-full max-w-xs">
+					<label class="label">
+						<span class="label-text">Password:</span>
+					</label>
+					<input type="password" placeholder="Type here" class="input input-bordered w-full max-w-xs" name="password" value="{{ flashMessages.get('password', '')}}" />
+					@if(flashMessages.has('errors.password'))
+					<label class="label">
+						<span class="label-text text-red-500">{{ flashMessages.get('errors.password') }}</span>
+					</label>
+					@endif
+				</div>
+				<div class="card-actions justify-end mt-2">
+					<button class="btn btn-primary">Login</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+@end
